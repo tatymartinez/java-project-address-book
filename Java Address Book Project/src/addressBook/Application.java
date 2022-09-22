@@ -4,40 +4,41 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Application {
-	
+	static AddressBook addressBook = new AddressBook();
+		
 	public static void main(String[] args) {
 		boolean running = true;
 		
 		while(running) {
 		Scanner in = new Scanner(System.in);
-		AddressBook addressBook = new AddressBook();
+		
 		
 		displayMenu();
 		
 		int choice = in.nextInt();
 		switch(choice) {
 			case 1: 
-				addressBook.setAddressBook(addEntry()); 
+				addressBook.addAddress(addEntry()); 
 				break;
 				
 			case 2:
-				//removeEntry();
+				System.out.println(removeEntry());
 				break;
 				
 			case 3:
-				//searchEntry();
+				System.out.println(searchEntry());
 				break;
 			
 			case 4: 
-				//printAddressBook();
+				printAddressBook();
 				break;
 				
 			case 5: 
-				//deleteAddressBook();
+				deleteAddressBook();
 				break;
 				
 			case 6:
-				//quitProgram();
+				System.out.println("Thanks, have a great day!");
 				running = false;
 				break;
 				
@@ -79,14 +80,72 @@ public class Application {
 		System.out.println("What is your email address?");
 		String emailAddressInput = in.nextLine();
 		
-		EntryAddress entry1 = new EntryAddress(firstNameInput, lastNameInput, phoneNumberInput, emailAddressInput);
+		EntryAddress newEntry = new EntryAddress(firstNameInput, lastNameInput, phoneNumberInput, emailAddressInput);
 		
-		return entry1;
+		return newEntry;
 	}
 	
-	public static void removeEntry() {
+	public static String removeEntry() {
+		Scanner in = new Scanner(System.in);
+		
+		System.out.println("Enter an entry's email to remove: ");
+		String emailInput = in.nextLine();
+		
+		int i=0; 
+		for(EntryAddress entry : addressBook.getAddressBook()) {
+			if (emailInput.equals(entry.getEmailAddress())) {
+				addressBook.getAddressBook().remove(i);
+				return "Address has been deleted. /n" + entry.toString();
+			}
+			i++;
+		}
+		return "Address was not found.";
+	}
+	
+	public static String searchEntry() {
+		Scanner in = new Scanner(System.in);
+		
+		System.out.println("Please provide email address for contact: ");
+		String searchType = in.nextLine();
+		
+		for(EntryAddress entry : addressBook.getAddressBook()) {
+			if (searchType.equals(entry.getEmailAddress())) {
+				return entry.toString();
+			}
+		}
+		return "Address was not found.";
 		
 	}
 	
+	public static void printAddressBook() {
+		Scanner in = new Scanner(System.in);
+		int i=0;
+		
+		if(!addressBook.getAddressBook().isEmpty()) { 
+			for(i=0; i < addressBook.getAddressBook().size(); i++) {
+				System.out.println(addressBook.getAddressBook().get(i));
+			}
+			
+		} else {
+			System.out.println("Address book is empty.");
+		}
+		
+	}
+	
+	public static void deleteAddressBook() {
+		Scanner in = new Scanner(System.in);
+		int i=0;
+		
+		if(!addressBook.getAddressBook().isEmpty()) {
+			for(i=0; i < addressBook.getAddressBook().size(); i++) {
+				addressBook.getAddressBook().clear();
+				System.out.println("Address book cleared!");
+			}
+			
+		} else {
+			System.out.println("Invalid entry.");
+		}
+		
+	}
 	
 }

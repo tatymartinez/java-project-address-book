@@ -13,21 +13,18 @@ public class AddressBook {
 		this.addressBook = addressBook;
 	}
 	
-	public void setAddressBook(EntryAddress entry) {
-		this.addressBook.add(entry);
-		System.out.println(addressBook.toString());
-		
-	}
-	
 	public ArrayList<EntryAddress> getAddressBook() {
 		return addressBook;
 	}
 
+	public void addAddress(EntryAddress entry) {
+		this.addressBook.add(entry);
+		System.out.println(addressBook.toString());
+	}
+	
 	@Override
 	public String toString() {
 		return "AddressBook [addressBook=" + addressBook + "]";
 	}
-	
-	
 	
 }
