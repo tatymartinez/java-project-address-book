@@ -134,14 +134,10 @@ public class Application {
 	
 	public static void deleteAddressBook() {
 		Scanner in = new Scanner(System.in);
-		int i=0;
 		
 		if(!addressBook.getAddressBook().isEmpty()) {
-			for(i=0; i < addressBook.getAddressBook().size(); i++) {
-				addressBook.getAddressBook().clear();
-				System.out.println("Address book cleared!");
-			}
-			
+			addressBook.getAddressBook().clear();
+			System.out.println("Address book cleared!");
 		} else {
 			System.out.println("Invalid entry.");
 		}
