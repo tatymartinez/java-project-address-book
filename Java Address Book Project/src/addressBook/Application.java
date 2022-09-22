@@ -133,8 +133,6 @@ public class Application {
 	}
 	
 	public static void deleteAddressBook() {
-		Scanner in = new Scanner(System.in);
-		
 		if(!addressBook.getAddressBook().isEmpty()) {
 			addressBook.getAddressBook().clear();
 			System.out.println("Address book cleared!");
